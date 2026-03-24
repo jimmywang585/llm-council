@@ -159,7 +159,8 @@ Provide a clear, well-reasoned final answer that represents the council's collec
     messages = [{"role": "user", "content": chairman_prompt}]
 
     # Query the chairman model
-    response = await query_model(CHAIRMAN_MODEL, messages)
+    # User requested huge token limit
+    response = await query_model(CHAIRMAN_MODEL, messages, timeout=300.0, max_tokens=100000)
 
     if response is None:
         # Fallback if chairman fails
